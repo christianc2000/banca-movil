@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
-require('dotenv').config()//Variable de entorno
+require('dotenv').config();
 
-const jwt_secret=process.env.JWT_SECRET;
-console.log('jwt_secret: ',jwt_secret);
+const jwt_secret = process.env.JWT_SECRET;
+
 function verificarToken(req, res, next) {
   const authHeader = req.headers['authorization'];
 
@@ -17,12 +17,13 @@ function verificarToken(req, res, next) {
       return res.status(401).json({ mensaje: 'Token inválido' });
     }
 
-    req.usuario = decoded.usuario;
+    req.usuario = decoded; // Establecer el objeto decodificado en req.usuario
     next();
   });
 }
 
 module.exports = verificarToken;
+
 
   
   module.exports = verificarToken;
