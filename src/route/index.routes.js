@@ -4,6 +4,7 @@ const {cuenta, cuentas, nroCuenta, deposito, retiro, movimientos} = require('../
 const verificarToken = require('../middleware/jwtMiddleware');
 const router = Router();
 
+router.get('/',prueba);
 router.post('/register/',register);
 router.post('/login/', autenticar);
 router.get('/usuario',verificarToken, usuario); //datos del usuario loggueado
@@ -14,6 +15,6 @@ router.post('/cuenta/:nroCuenta/deposito',verificarToken, deposito);
 router.post('/cuenta/:nroCuenta/retiro',verificarToken, retiro);
 router.get('/cuenta/:nroCuenta/movimientos', verificarToken, movimientos);
 
-router.get('/inicial',prueba);
+//router.get('/inicial',prueba);
 router.post('/setpass',verificarToken, setPass);
 module.exports = router;
