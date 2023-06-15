@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const db = require('./src/databaseConection/dbconection');
 const app = express();
 const { createClientesTable, createTipoCuentaTable, createBancoTable, createTipoMonedaTable, createCuentaTable, createMovimientoTable } = require('./src/databaseConection/tablas')
-const { addPassword, selectFrom, insertClientes, insertTipoCuentas, insertBancos, insertTipoMonedas, insertCuentas } = require('./src/databaseConection/poblacion');
+const { addPassword, selectFrom, insertClientes, insertTipoCuentas, insertBancos, insertTipoMonedas, insertCuentas, insertMovimientos } = require('./src/databaseConection/poblacion');
 
 require('dotenv').config()//Variable de entorno
 //const keys = require('./settings/keys');//keys
@@ -25,13 +25,14 @@ app.listen(puerto, async () => {
         // createBancoTable();
         // createTipoMonedaTable();
         //createCuentaTable();
-        //createMovimientoTable();
+       // createMovimientoTable();
         //*************Insertar datos*******************
         //insertClientes();
         //insertTipoCuentas();
         //insertBancos();
         // insertTipoMonedas();
         //insertCuentas();
+        //insertMovimientos()
         //addPassword('12345678',2);
         //addPassword('12345678',3);
         //addPassword('12345678',4);

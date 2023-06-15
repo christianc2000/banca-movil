@@ -50,9 +50,10 @@ const deposito = async (req, res) => {
         }
         // Realizar el depósito sumando el monto al saldo actual
         nuevoSaldo = parseFloat(result.saldo) + parseFloat(monto);
+        console.log('nuevoSaldo: '+nuevoSaldo);
         // Actualizar el saldo en la base de datos
         const cuenta_id = await Cuenta.updateSaldoCuenta(nuevoSaldo, nroCuenta);
-        const movimiento = await Movimiento.insertMovimiento(parseFloat(monto), "depósito", parseInt(tipomoneda_id), cuenta_id);//1 es el depósito
+        const movimiento = await Movimiento.insertMovimiento(parseFloat(monto), "depósito", parseInt(tipomoneda_id), cuenta_id,nroCuenta);//1 es el depósito
         res.json({ message: 'Depósito realizado exitosamente', depositó: monto, Saldo: nuevoSaldo, Movimiento: movimiento });
     } catch (err) {
         console.error('Error al realizar el depósito', err);
@@ -74,7 +75,35 @@ const retiro = async (req, res) => {
         if (monto <= result.saldo) {
             nuevoSaldo = parseFloat(result.saldo) - parseFloat(monto);
             // Actualizar el saldo en la base de datos
-            const movimiento = await Movimiento.insertMovimiento(parseFloat(monto), "retiro", parseInt(tipomoneda_id), result.id);//1 es el depósito
+            const movimiento = await Movimiento.insertMovimiento(parseFloat(monto), "retiro", parseInt(tipomoneda_id), result.id, nroCuenta);//1 es el depósito
+            await Cuenta.updateSaldoCuenta(nuevoSaldo, nroCuenta);
+
+            res.json({ message: 'Retiro realizado exitosamente', retiró: monto, Saldo: nuevoSaldo, Movimiento: movimiento });
+        } else {
+            res.json({ message: "Saldo insuficiente para retirar", saldo:result.saldo });
+        }
+
+    } catch (err) {
+        console.error('Error al realizar el depósito', err);
+        res.status(500).json({ message: 'Ocurrió un error al realizar el depósito' });
+    }
+}
+
+const pagar = async (req, res) => {
+    try {
+        const { nroCuenta } = req.params;
+        const { monto, tipomoneda_id, nroCuentaDestino } = req.body;
+
+        const result = await Cuenta.getCuenta(nroCuenta);
+        console.log(result);
+        if (result.length === 0) {
+            return res.status(404).json({ mensaje: 'Cuenta no encontrada' });
+        }
+        // Realizar el depósito sumando el monto al saldo actual
+        if (monto <= result.saldo) {
+            nuevoSaldo = parseFloat(result.saldo) - parseFloat(monto);
+            // Actualizar el saldo en la base de datos
+            const movimiento = await Movimiento.insertMovimiento(parseFloat(monto), "pagar", parseInt(tipomoneda_id), result.id, parseInt(nroCuentaDestino));//1 es el depósito
             await Cuenta.updateSaldoCuenta(nuevoSaldo, nroCuenta);
 
             res.json({ message: 'Retiro realizado exitosamente', retiró: monto, Saldo: nuevoSaldo, Movimiento: movimiento });

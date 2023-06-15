@@ -1,11 +1,12 @@
 const db = require('../databaseConection/dbconection');
 
 class Movimiento {
-    constructor(monto, tipo, tipomoneda_id, cuenta_id) {
+    constructor(monto, tipo, tipomoneda_id, cuenta_id, nroCuentaDestino) {
         this.monto = monto;
         this.tipo = tipo;
         this.tipomoneda_id = tipomoneda_id;
         this.cuenta_id = cuenta_id;
+        this.nroCuentaDestino=nroCuentaDestino;
     }
 
     static validarDatos(monto, tipo, tipomoneda_id, cuenta_id) {
@@ -24,14 +25,17 @@ class Movimiento {
         if (typeof cuenta_id !== 'number' || !Number.isInteger(cuenta_id) || cuenta_id <= 0) {
             throw new Error('El cuenta_id debe ser un número entero válido mayor que cero.');
         }
+        if (typeof nroCuentaDestino !== 'number' || !Number.isInteger(nroCuentaDestino) || nroCuentaDestino <= 0) {
+            throw new Error('El nro de cuenta destino debe ser un número entero válido mayor que cero.');
+        }
     }
 
-    static async insertMovimiento(monto, tipo, tipomoneda_id, cuenta_id) {
+    static async insertMovimiento(monto, tipo, tipomoneda_id, cuenta_id, nroCuentaDestino) {
         try {
             this.validarDatos(monto, tipo, tipomoneda_id, cuenta_id);
 
-            const query = 'INSERT INTO movimientos (monto, tipo, tipomoneda_id, cuenta_id) VALUES ($1, $2, $3, $4) RETURNING *';
-            const values = [monto, tipo, tipomoneda_id, cuenta_id];
+            const query = 'INSERT INTO movimientos (monto, tipo, tipomoneda_id, cuenta_id, nroCuentaDestino) VALUES ($1, $2, $3, $4) RETURNING *';
+            const values = [monto, tipo, tipomoneda_id, cuenta_id, nroCuentaDestino];
 
             const result = await db.client.query(query, values);
             return result.rows[0];
@@ -69,12 +73,12 @@ class Movimiento {
         return movimientosResult.rows;
     }
 
-    static async updateMovimiento(id, monto, tipo, tipomoneda_id, cuenta_id) {
+    static async updateMovimiento(id, monto, tipo, tipomoneda_id, cuenta_id,nroCuentaDestino) {
 
         try {
-            this.validarDatos(monto, tipo, tipomoneda_id, cuenta_id);
-            const query = 'UPDATE movimientos SET monto = $1, tipo = $2, tipomoneda_id = $3, cuenta_id = $4 WHERE id = $5 RETURNING *';
-            const values = [monto, tipo, tipomoneda_id, cuenta_id, id];
+            this.validarDatos(monto, tipo, tipomoneda_id, cuenta_id,nroCuentaDestino);
+            const query = 'UPDATE movimientos SET monto = $1, tipo = $2, tipomoneda_id = $3, cuenta_id = $4, nroCuentaDestino=$6 WHERE id = $5 RETURNING *';
+            const values = [monto, tipo, tipomoneda_id, cuenta_id, id,nroCuentaDestino];
 
             const result = await db.query(query, values);
             return result.rows[0];
