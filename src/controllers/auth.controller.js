@@ -1,6 +1,4 @@
-const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const db = require('../databaseConection/dbconection');
 const jwt_secret = process.env.JWT_SECRET;
 const Cliente = require('../models/clientes');
 
@@ -11,9 +9,9 @@ const setPass = async (req, res) => {
 
         console.log('id: ', id);
 
-        const { password } = req.body; // Obtener cliente_id y password del cuerpo de la solicitud
+        const { password, iduser } = req.body; // Obtener cliente_id y password del cuerpo de la solicitud
         console.log('constraseña: ', password);
-        await Cliente.setPassword(id, password); // Llamar al método estático setPassword
+        await Cliente.setPassword(iduser, password); // Llamar al método estático setPassword
 
         res.json({ message: 'Contraseña guardada exitosamente' });
     } catch (error) {

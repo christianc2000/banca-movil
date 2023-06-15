@@ -123,7 +123,7 @@ const createMovimientoTable = () => {
         if (err) {
             console.error('1 Error al crear la tabla:', err);
         } else {
-            console.log('Tabla moi creada exitosamente');
+            console.log('Tabla movimiento creada exitosamente');
         }
     });
 }

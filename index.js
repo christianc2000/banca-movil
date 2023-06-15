@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const db = require('./src/databaseConection/dbconection');
 const app = express();
 const { createClientesTable, createTipoCuentaTable, createBancoTable, createTipoMonedaTable, createCuentaTable, createMovimientoTable } = require('./src/databaseConection/tablas')
-
+const { addPassword, selectFrom, insertClientes, insertTipoCuentas, insertBancos, insertTipoMonedas, insertCuentas } = require('./src/databaseConection/poblacion');
 
 require('dotenv').config()//Variable de entorno
 //const keys = require('./settings/keys');//keys
@@ -19,13 +19,23 @@ app.use(bodyParser.json());
 app.listen(puerto, async () => {
     try {
         await db.conexion();
-        //Crear tabla cliente
+        //*************Crear tablas********************
         // createClientesTable();
         // createTipoCuentaTable();
         // createBancoTable();
         // createTipoMonedaTable();
         //createCuentaTable();
-       // createMovimientoTable();
+        //createMovimientoTable();
+        //*************Insertar datos*******************
+        //insertClientes();
+        //insertTipoCuentas();
+        //insertBancos();
+        // insertTipoMonedas();
+        //insertCuentas();
+        //addPassword('12345678',2);
+        //addPassword('12345678',3);
+        //addPassword('12345678',4);
+       await selectFrom();
         console.log('Conexión exitosa a la base de datos');
     } catch (err) {
         console.error('Error al conectar a la base de datos', err);
