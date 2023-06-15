@@ -137,8 +137,8 @@ const movimientos = async (req, res) => {
     try {
         const { nroCuenta } = req.params;
         const movimientos = await Movimiento.getCuentaMovimiento(nroCuenta);
-
-        res.json({ movimientos });
+        const cuenta = await Cuenta.getCuenta(nroCuenta);
+        res.json({ movimientos, cuenta });
     } catch (err) {
         console.error('Error al obtener las movimientos', err);
         res.status(500).json({ message: 'Ocurrió un error al obtener las movimientos' });
