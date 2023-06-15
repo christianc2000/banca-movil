@@ -53,7 +53,7 @@ const deposito = async (req, res) => {
         console.log('nuevoSaldo: '+nuevoSaldo);
         // Actualizar el saldo en la base de datos
         const cuenta_id = await Cuenta.updateSaldoCuenta(nuevoSaldo, nroCuenta);
-        const movimiento = await Movimiento.insertMovimiento(parseFloat(monto), "depósito", parseInt(tipomoneda_id), cuenta_id,nroCuenta);//1 es el depósito
+        const movimiento = await Movimiento.insertMovimiento(parseFloat(monto), "depósito", parseInt(tipomoneda_id), cuenta_id, parseInt(nroCuenta));//1 es el depósito
         res.json({ message: 'Depósito realizado exitosamente', depositó: monto, Saldo: nuevoSaldo, Movimiento: movimiento });
     } catch (err) {
         console.error('Error al realizar el depósito', err);
