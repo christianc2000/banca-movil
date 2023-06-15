@@ -16,11 +16,11 @@ router.post('/cuenta/:nroCuenta/deposito',verificarToken, deposito);
 router.post('/cuenta/:nroCuenta/retiro',verificarToken, retiro);
 router.get('/cuenta/:nroCuenta/movimientos', verificarToken, movimientos);
 
-router.get('/clientes', verificarToken, getClientes);
-router.get('/cuentas', verificarToken, getCuentas);
-router.get('/bancos', verificarToken,getBancos);
-router.get('/tipocuentas', verificarToken,getTipoCuentas);
-router.get('/tipomonedas', verificarToken, getTipoMonedas);
+router.get('/clientes-total', verificarToken, getClientes);
+router.get('/cuentas-total', verificarToken, getCuentas);
+router.get('/bancos-total', verificarToken,getBancos);
+router.get('/tipocuentas-total', verificarToken,getTipoCuentas);
+router.get('/tipomonedas-total', verificarToken, getTipoMonedas);
 
 
 //router.get('/inicial',prueba);
