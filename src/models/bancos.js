@@ -36,7 +36,7 @@ class Banco {
         try {
             const query = 'SELECT * FROM bancos';
             const result = await db.client.query(query);
-            return result.rows[0];
+            return result.rows;
         } catch (error) {
             console.error('Error al obtener los banco:', error);
             throw error;

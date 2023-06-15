@@ -8,9 +8,9 @@ const client = new Client({
   password: process.env.PG_PASSWORD,
   port: process.env.PG_PORT,
 });
-//const connectionString = 'postgres://postgresbancamovil:ytKbNChNhqT1bpRYWt8AWEC087KnGOZ8@dpg-ci4fgqtgkuvm71e2uu80-a.oregon-postgres.render.com/bancamovil';
+/*const connectionString = 'postgres://postgresbancamovil:ytKbNChNhqT1bpRYWt8AWEC087KnGOZ8@dpg-ci4fgqtgkuvm71e2uu80-a.oregon-postgres.render.com/bancamovil';
 
-/*const client = new Client({
+const client = new Client({
   connectionString,
   ssl: {
     rejectUnauthorized: false,

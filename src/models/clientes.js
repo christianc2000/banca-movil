@@ -99,7 +99,7 @@ class Cliente {
         try {
             const query = 'SELECT * FROM clientes';
             const result = await db.client.query(query);
-            return result.rows[0];
+            return result.rows;
         } catch (error) {
             console.error('Error al obtener los clientes:', error);
             throw error;

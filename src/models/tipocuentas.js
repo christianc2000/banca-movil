@@ -46,7 +46,7 @@ class TipoCuenta {
         try {
             const query = 'SELECT * FROM tipocuentas';
             const result = await db.client.query(query);
-            return result.rows[0];
+            return result.rows;
         } catch (error) {
             console.error('Error al obtener los tipo de cuentas:', error);
             throw error;

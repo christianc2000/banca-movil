@@ -46,7 +46,7 @@ class TipoMoneda {
         try {
             const query = 'SELECT * FROM tipomonedas';
             const result = await db.client.query(query);
-            return result.rows[0];
+            return result.rows;
         } catch (error) {
             console.error('Error al obtener los tipo de moneda:', error);
             throw error;
