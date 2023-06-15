@@ -109,14 +109,14 @@ const createTableMovimientoQuery = `
    tipomoneda_id INTEGER NOT NULL,
    cuenta_id  INTEGER NOT NULL,
    tipo varchar(100) NOT NULL,
-   nroCuentaDestino INTEGER;
+   nroCuentaDestino INTEGER NOT NULL,
 FOREIGN KEY (tipomoneda_id) REFERENCES tipomonedas(id)
 ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY (cuenta_id) REFERENCES cuentas(id)
 ON DELETE CASCADE ON UPDATE CASCADE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-  )
+  );
 `;
 const createMovimientoTable = () => {
     db.client.query(createTableMovimientoQuery, (err, result) => {

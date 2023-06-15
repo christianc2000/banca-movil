@@ -24,7 +24,7 @@ app.listen(puerto, async () => {
         // createTipoCuentaTable();
         // createBancoTable();
         // createTipoMonedaTable();
-        //createCuentaTable();
+       // createCuentaTable();
        // createMovimientoTable();
         //*************Insertar datos*******************
         //insertClientes();
@@ -32,11 +32,11 @@ app.listen(puerto, async () => {
         //insertBancos();
         // insertTipoMonedas();
         //insertCuentas();
-        //insertMovimientos()
+      //insertMovimientos()
         //addPassword('12345678',2);
         //addPassword('12345678',3);
         //addPassword('12345678',4);
-       await selectFrom();
+        //await selectFrom();
         console.log('Conexión exitosa a la base de datos');
     } catch (err) {
         console.error('Error al conectar a la base de datos', err);

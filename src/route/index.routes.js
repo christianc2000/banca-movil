@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const {autenticar, usuario, setPass, register, prueba} = require('../controllers/auth.controller');
-const {cuenta, cuentas, nroCuenta, deposito, retiro, movimientos} = require('../controllers/cuenta.controller');
+const {cuenta, cuentas, nroCuenta, deposito, retiro, movimientos, pagar} = require('../controllers/cuenta.controller');
 const {getBancos, getClientes, getTipoMonedas, getTipoCuentas, getCuentas} = require('../controllers/api.controller');
 const verificarToken = require('../middleware/jwtMiddleware');
 const router = Router();
@@ -14,6 +14,7 @@ router.get('/cuenta/:nroCuenta',verificarToken, cuenta);
 router.get('/cuenta/:nroCuenta/saldo',verificarToken, nroCuenta);
 router.post('/cuenta/:nroCuenta/deposito',verificarToken, deposito);
 router.post('/cuenta/:nroCuenta/retiro',verificarToken, retiro);
+router.post('/cuenta/:nroCuenta/pago', verificarToken, pagar);
 router.get('/cuenta/:nroCuenta/movimientos', verificarToken, movimientos);
 
 router.get('/clientes-total', verificarToken, getClientes);

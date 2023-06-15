@@ -9,7 +9,7 @@ class Movimiento {
         this.nroCuentaDestino=nroCuentaDestino;
     }
 
-    static validarDatos(monto, tipo, tipomoneda_id, cuenta_id) {
+    static validarDatos(monto, tipo, tipomoneda_id, cuenta_id, nroCuentaDestino) {
         if (typeof monto !== 'number' || isNaN(monto) || monto <= 0) {
             throw new Error('El monto debe ser un número válido mayor que cero.');
         }
@@ -25,6 +25,7 @@ class Movimiento {
         if (typeof cuenta_id !== 'number' || !Number.isInteger(cuenta_id) || cuenta_id <= 0) {
             throw new Error('El cuenta_id debe ser un número entero válido mayor que cero.');
         }
+        console.log('desde modelo movimiento: nroCuentaDestino: '+nroCuentaDestino);
         if (typeof nroCuentaDestino !== 'number' || !Number.isInteger(nroCuentaDestino) || nroCuentaDestino <= 0) {
             throw new Error('El nro de cuenta destino debe ser un número entero válido mayor que cero.');
         }
@@ -32,9 +33,10 @@ class Movimiento {
 
     static async insertMovimiento(monto, tipo, tipomoneda_id, cuenta_id, nroCuentaDestino) {
         try {
-            this.validarDatos(monto, tipo, tipomoneda_id, cuenta_id);
+            console.log('desde insert: '+nroCuentaDestino);
+            this.validarDatos(monto, tipo, tipomoneda_id, cuenta_id, nroCuentaDestino);
 
-            const query = 'INSERT INTO movimientos (monto, tipo, tipomoneda_id, cuenta_id, nroCuentaDestino) VALUES ($1, $2, $3, $4) RETURNING *';
+            const query = 'INSERT INTO movimientos (monto, tipo, tipomoneda_id, cuenta_id, nroCuentaDestino) VALUES ($1, $2, $3, $4,$5) RETURNING *';
             const values = [monto, tipo, tipomoneda_id, cuenta_id, nroCuentaDestino];
 
             const result = await db.client.query(query, values);

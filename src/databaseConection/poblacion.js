@@ -39,15 +39,16 @@ const insertRowCuenta = `INSERT INTO cuentas (nro, saldo, tipocuenta_id, cliente
  (11110004,0,2,4,2)
 `;
 
+
 const insertRowMovimientos = `INSERT INTO movimientos (monto, tipomoneda_id, cuenta_id, tipo, nroCuentaDestino) VALUES
- (1000,1,1,'depósito',12345678),
+ 
  (1000,1,2,'depósito',11110001),
  (1000,1,3,'depósito',12345679),
  (1000,1,4,'depósito',11110002),
  (1000,1,5,'depósito',12345677),
  (1000,1,6,'depósito',11110003),
  (1000,1,7,'depósito',12345676),
- (1000,1,8,'depósito',11110004)
+ (1000,1,8,'depósito',11110004);
 `;
 const insertClientes = () => {
     db.client.query(insertRowCliente, (err, result) => {
@@ -123,13 +124,18 @@ const  addPassword = async(password, cliente_id) => {
     }
 }
 const selectFrom = async() => {
-    await db.client.query(`select * from cuentas;`, (err, result) => {
+    await db.client.query(`select * from movimientos;`, (err, result) => {
         if (err) {
             console.error('Error al hacer select:', err);
         } else {
             console.log('Select realizado con éxito');
             console.log(result.rows);
         }
+        const rowCount = result.rowCount;
+  const columnCount = result.fields.length;
+
+  console.log('Cantidad de filas:', rowCount);
+  console.log('Cantidad de columnas:', columnCount);
     });
 }
 module.exports = {
