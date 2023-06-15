@@ -124,6 +124,18 @@ class Cuenta {
             throw error;
         }
     }
+
+    static async getAllCuentas() {
+        try {
+            const query = 'SELECT * FROM cuentas';
+            const result = await db.client.query(query);
+            return result.rows[0];
+        } catch (error) {
+            console.error('Error al obtener los cuentas:', error);
+            throw error;
+        }
+    }
+    
 }
 
 module.exports = Cuenta;

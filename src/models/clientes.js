@@ -94,6 +94,17 @@ class Cliente {
             throw error;
         }
     }
+
+    static async getAllClientes() {
+        try {
+            const query = 'SELECT * FROM clientes';
+            const result = await db.client.query(query);
+            return result.rows[0];
+        } catch (error) {
+            console.error('Error al obtener los clientes:', error);
+            throw error;
+        }
+    }
     
 }
 
