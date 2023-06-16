@@ -59,7 +59,7 @@ class Cuenta {
     }
     static async getClientCuenta(cliente_id) {
         try {
-            const query = 'SELECT * FROM cuentas WHERE cliente_id = $1';
+            const query = 'SELECT cuentas.nro, cuentas.saldo, bancos.nombre as banco_id  FROM cuentas, bancos WHERE cliente_id = $1 and cuentas.banco_id=bancos.id;';
             const Cliente_id = [cliente_id];
             console.log(Cliente_id);
             const result = await db.client.query(query, Cliente_id);
