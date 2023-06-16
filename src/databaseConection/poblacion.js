@@ -43,7 +43,7 @@ const insertRowCuenta = `INSERT INTO cuentas (nro, saldo, tipocuenta_id, cliente
 
 
 const insertRowMovimientos = `INSERT INTO movimientos (monto, tipomoneda_id, cuenta_id, tipo, nroCuentaDestino) VALUES
-(1000,1,2,'depósito',12345678),
+ (1000,1,1,'depósito',12345678),
  (1000,1,2,'depósito',11110001),
  (1000,1,3,'depósito',12345679),
  (1000,1,4,'depósito',11110002),
@@ -132,7 +132,7 @@ const addPassword = async (password, cliente_id) => {
     }
 }
 const selectFrom = async () => {
-    await db.client.query(`select * from clientes;`, (err, result) => {
+    await db.client.query(`select * from movimientos;`, (err, result) => {
         if (err) {
             console.error('Error al hacer select:', err);
         } else {

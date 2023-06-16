@@ -33,7 +33,7 @@ app.listen(puerto, async () => {
         //insertBancos();
         // insertTipoMonedas();
        // insertCuentas();
-        //insertMovimientos()
+       // insertMovimientos()
         //addPassword('12345678',2);
         //addPassword('12345678',3);
         //addPassword('12345678',4);
