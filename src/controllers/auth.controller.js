@@ -27,19 +27,19 @@ const prueba = async (req, res) => {
 const autenticar = async (req, res) => {
     try {
         const { ci, password } = req.body;
-        
+
         const cliente = await Cliente.login(ci, password);
-      
+
         console.log(cliente);
         const payload = {
             id: cliente.id,
             check: true
         };
-       
-        const token = jwt.sign(payload, jwt_secret, {
-            expiresIn: '1d'
-        });
 
+        const token = jwt.sign(payload, jwt_secret, {
+            expiresIn: '2d'
+        });
+        console.log('el token: ' + token);
         res.json({
             message: '¡Autenticación Exitosa!',
             token: token
