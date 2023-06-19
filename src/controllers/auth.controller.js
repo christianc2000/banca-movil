@@ -19,7 +19,7 @@ const setPass = async (req, res) => {
         res.status(500).json({ message: 'Ocurrió un error al guardar la contraseña' });
     }
 }
-const prueba= async (req, res) => {
+const prueba = async (req, res) => {
     res.json({
         message: 'HOLAAA MUNDO'
     });
@@ -27,16 +27,17 @@ const prueba= async (req, res) => {
 const autenticar = async (req, res) => {
     try {
         const { ci, password } = req.body;
-console.log('ci: '+ ci+', password: '+password);
+        
         const cliente = await Cliente.login(ci, password);
-
+      
+        console.log(cliente);
         const payload = {
             id: cliente.id,
             check: true
         };
-
+       
         const token = jwt.sign(payload, jwt_secret, {
-            expiresIn: '7d'
+            expiresIn: '1d'
         });
 
         res.json({
@@ -54,8 +55,8 @@ const usuario = async (req, res) => {
         const { id } = req.usuario;
         // Consultar el saldo de la cuenta en la base de datos
         //console.log(id);
-        const cliente =await Cliente.getCliente(id);
-      
+        const cliente = await Cliente.getCliente(id);
+
         res.json({ cliente });
     } catch (err) {
         console.error('Error al obtener el saldo de la cuenta', err);
@@ -82,4 +83,4 @@ const register = async (req, res) => {
         res.status(500).json({ mensaje: 'Ocurrió un error al crear su cuenta' });
     }
 }
-module.exports = { autenticar, usuario, setPass, register, prueba};
+module.exports = { autenticar, usuario, setPass, register, prueba };

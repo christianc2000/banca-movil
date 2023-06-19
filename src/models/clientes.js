@@ -49,7 +49,7 @@ class Cliente {
         try {
             const query = 'SELECT * FROM clientes WHERE ci = $1';
             const values = [ci];
-
+          
             const result = await db.client.query(query, values);
             if (result.rows.length === 0) {
                 throw new Error('Credenciales inválidas. Inténtalo de nuevo.');
